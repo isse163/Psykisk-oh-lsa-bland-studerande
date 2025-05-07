@@ -1,1 +1,5 @@
-# Psykisk-oh-lsa-bland-studerande
+<<<<<<< HEAD
+Din lokala version av filen
+=======
+Versionen från GitHub
+>>>>>>> main
