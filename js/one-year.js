@@ -1,37 +1,30 @@
-let years = (await dbQuery(
-  'SELECT DISTINCT year FROM dataWithMonths'
-)).map(x => x.year);
+import { addPage, drawGoogleChart, tableFromData } from './libs/utils.js';
 
-let currentYear = addDropdown('År', years, 2024);
+// Lägg till en ny sida i menyn
+addPage('Sömn vs Depression', 'sleepDepression');
 
-addMdToPage(`
-  ## Medeltemperaturer i Malmö ${currentYear}
-`);
+// Hämta data via backend
+const response = await fetch('/api/sleep-vs-depression');
+const rawData = await response.json();
 
-let dataForChart = await dbQuery(
-  `SELECT monthNameShort, temperatureC FROM dataWithMonths WHERE year = '${currentYear}'`
-);
+// Format för Google Charts
+const chartData = [['Sömn (timmar)', 'Depressionsnivå'], ...rawData];
 
-drawGoogleChart({
-  type: 'LineChart',
-  data: makeChartFriendly(dataForChart, 'månad', '°C'),
-  options: {
-    height: 500,
-    chartArea: { left: 50, right: 0 },
-    curveType: 'function',
-    pointSize: 5,
-    pointShape: 'circle',
-    vAxis: { format: '# °C' },
-    title: `Medeltemperatur per månad i Malmö ${currentYear} (°C)`
-  }
+// Rita ett scatter chart
+drawGoogleChart('ScatterChart', 'sleepDepression', chartData, {
+  height: 500,
+  title: 'Samband mellan sömnlängd och depressionsnivå',
+  hAxis: { title: 'Sömn (timmar)' },
+  vAxis: { title: 'Depression (skala)' },
+  pointSize: 6,
+  legend: 'none'
 });
 
-// the same db query as before, but with the long month names
-let dataForTable = await dbQuery(
-  `SELECT monthName, temperatureC FROM dataWithMonths WHERE year = '${currentYear}'`
-);
-
-tableFromData({
-  data: dataForTable,
-  columnNames: ['Månad', 'Medeltemperatur (°C)']
-});
+// Tabellvisning
+const tableDiv = document.createElement('div');
+tableDiv.appendChild(tableFromData([
+  ['Sömn (timmar)', 'Depressionsnivå'],
+  ...rawData
+]));
+document.getElementById('sleepDepression').appendChild(tableDiv);
+ 
