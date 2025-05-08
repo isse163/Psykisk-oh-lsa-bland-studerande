@@ -1,13 +1,8 @@
-// sstatparts.js
-
-/**
- * Hämtar sömnlängd och depressionspoäng från databasen och returnerar dem som datapunkter.
- * Format: [sömn i timmar, depressionspoäng]
- *
- * @param {sqlite3.Database} db - En öppen SQLite-databasanslutning.
- * @returns {Promise<Array<[number, number]>>} - En array av datapunkter.
- */
+import { getSleepVsDepression } from './sstatparts.js';
 export function getSleepVsDepression(db) {
+ }
+import getSleepVsDepression from './sstatparts.js';
+export default function getSleepVsDepression(db) {
   return new Promise((resolve, reject) => {
     db.all(
       `SELECT "Sleep Duration", Depression FROM student_health`,
