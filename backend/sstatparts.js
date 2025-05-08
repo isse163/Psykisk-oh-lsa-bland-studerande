@@ -1,6 +1,4 @@
-import { getSleepVsDepression } from './sstatparts.js';
-export function getSleepVsDepression(db) {
- }
+// Removed duplicate function declaration
 import getSleepVsDepression from './sstatparts.js';
 export default function getSleepVsDepression(db) {
   return new Promise((resolve, reject) => {
