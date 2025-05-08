@@ -1,4 +1,4 @@
-export default function getSleepVsDepression(db) {
+export default function student_depreesion(db) {
   return new Promise((resolve, reject) => {
     db.all(`SELECT "Sleep Duration", Depression FROM student_health`, [], (err, rows) => {
       if (err) return reject(err);
