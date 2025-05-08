@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import sstatparts from './sstatparts.js';
 import dbRouter from './dbRouter.js';
+import { getSleepVsDepression } from './sstatparts.js';
 
 // Port to start the web server on
 const port = 3005;
