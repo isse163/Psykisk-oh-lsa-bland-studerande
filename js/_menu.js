@@ -3,4 +3,5 @@ createMenu('Statistics Template JS', [
   { name: 'Visa ett år', script: 'one-year.js' },
   { name: 'Jämför två år', script: 'compare-two-years.js' },
   { name: 'sleepvsdepression', script: 'sleep_depression.js' }
+  ['Sömn vs Depression', 'sleep-vs-depression.js']
 ]);
