@@ -10,13 +10,13 @@ const data = await response.json();
 
 drawGoogleChart({
   type: 'ScatterChart',
-  data: [['Sömn (timmar)', 'Depressionsnivå'], ...data],
+  data: [['Somn (timmar)', 'Depressionsniva'], ...data],
   options: {
     height: 500,
     chartArea: { left: 50, right: 10 },
-    hAxis: { title: 'Sömn (timmar)' },
+    hAxis: { title: 'Somn (timmar)' },
     vAxis: { title: 'Depression (skala)' },
     pointSize: 5,
-    title: 'Samband mellan sömn och depression bland studenter'
+    title: 'Samband mellan somn och depression bland studenter'
   }
 });
